@@ -1,7 +1,7 @@
 package com.felipe.fabrica.core.service;
 
-import com.felipe.fabrica.core.entity.RelatorioGeral;
-import com.felipe.fabrica.core.repository.RelatorioGeralRepository;
+import com.felipe.fabrica.core.entity.Chamado;
+import com.felipe.fabrica.core.repository.ChamadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,25 +13,15 @@ import java.util.Map;
 public class RelatorioGeralService {
 
     @Autowired
-    private RelatorioGeralRepository relatorioGeralRepository;
+    private ChamadoRepository chamadoRepository;
 
-    public Map<String, Object> getChart1Data() {
-        List<RelatorioGeral> relatorios = relatorioGeralRepository.findAll();
+    public Map<String, Object> getChartData() {
+        List<Chamado> chamados = chamadoRepository.findAll();
         Map<String, Object> data = new HashMap<>();
         data.put("columns", new Object[][] {
-            {"data1", relatorios.stream().mapToInt(RelatorioGeral::getValor1).toArray()},
-            {"data2", relatorios.stream().mapToInt(RelatorioGeral::getValor2).toArray()}
-        });
-        data.put("type", "bar");
-        return data;
-    }
-
-    public Map<String, Object> getChart2Data() {
-        List<RelatorioGeral> relatorios = relatorioGeralRepository.findAll();
-        Map<String, Object> data = new HashMap<>();
-        data.put("columns", new Object[][] {
-            {"data1", relatorios.stream().mapToInt(RelatorioGeral::getValor1).toArray()},
-            {"data2", relatorios.stream().mapToInt(RelatorioGeral::getValor2).toArray()}
+            {"Aberto", chamados.stream().filter(c -> "Aberto".equals(c.getStatus())).count()},
+            {"Em andamento", chamados.stream().filter(c -> "Em andamento".equals(c.getStatus())).count()},
+            {"Resolvido", chamados.stream().filter(c -> "Resolvido".equals(c.getStatus())).count()}
         });
         data.put("type", "bar");
         return data;

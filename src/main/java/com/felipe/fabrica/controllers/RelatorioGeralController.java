@@ -15,13 +15,8 @@ public class RelatorioGeralController {
     @Autowired
     private RelatorioGeralService relatorioGeralService;
 
-    @GetMapping("/chart1")
-    public Map<String, Object> getChart1Data() {
-        return relatorioGeralService.getChart1Data();
-    }
-
-    @GetMapping("/chart2")
-    public Map<String, Object> getChart2Data() {
-        return relatorioGeralService.getChart2Data();
+    @GetMapping("/chart")
+    public Map<String, Object> getChartData() {
+        return relatorioGeralService.getChartData();
     }
 }
