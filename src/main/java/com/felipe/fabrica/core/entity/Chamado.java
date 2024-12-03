@@ -25,10 +25,15 @@ public class Chamado {
     private String descricao;
     private String status;
     private LocalDateTime dataAbertura;
+    private LocalDateTime dataFechamento;
+    private String descricaoProblema;
 
-    public Chamado(String descricao, String status) {
+    public Chamado(String descricao, String status, String descricaoProblema) {
         this.descricao = descricao;
         this.status = status;
+        this.descricaoProblema = descricaoProblema;
+        this.dataAbertura = LocalDateTime.now();
+        this.dataFechamento = null;
     }
 
     @PrePersist
