@@ -19,11 +19,13 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    private String nome;
     private String email;
     private String password;
     private String role; // "TECNICO_TI" ou "USUARIO_COMUM"
 
-    public Usuario(String email, String password, String role) {
+    public Usuario(String nome, String email, String password, String role) {
+        this.nome = nome;
         this.email = email;
         this.password = password;
         this.role = role;
