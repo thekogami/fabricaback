@@ -25,16 +25,28 @@ public class Chamado {
     private LocalDateTime dataAbertura;
     private LocalDateTime dataFechamento;
     private String descricaoProblema;
+    private String prioridade;
+    private long usuarioId;
+    private String usuarioNome;
+    private long tecnicoId;
+    private String tecnicoNome;
+    private String requerente;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Movimentacao> movimentacoes = new ArrayList<>();
 
-    public Chamado(String descricao, String status, String descricaoProblema) {
+    public Chamado(String descricao, String status, String descricaoProblema, String prioridade, long usuarioId, String usuarioNome, String requerente) {
         this.descricao = descricao;
         this.status = status;
         this.descricaoProblema = descricaoProblema;
+        this.prioridade = prioridade;
+        this.usuarioId = usuarioId;
+        this.usuarioNome = usuarioNome;
         this.dataAbertura = LocalDateTime.now();
         this.dataFechamento = null;
+        this.tecnicoId = 0;
+        this.tecnicoNome = "";
+        this.requerente = requerente;
         addMovimentacao("Usuário", this.dataAbertura.toString(), descricaoProblema, "bg-green-3");
     }
 
